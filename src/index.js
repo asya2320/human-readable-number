@@ -2,6 +2,9 @@ module.exports = function toReadable(number) {
     let result = "";
     let str = String(number);
     let length = str.length;
+    if (number==0){
+        return 'zero';
+    }
     while (length > 0) {
         switch (length) {
             case 3: {
@@ -38,41 +41,64 @@ module.exports = function toReadable(number) {
             }
             case 2: {
                 switch (str[0]) {
+                    case "0":
+                        result=result.slice(0,result.length-1);
+                        break;
                     case "1": {
                         switch (str[1]) {
                             case "0":
                                 result += "ten";
+                                str = str.slice(1, str.length);
+                                length = str.length;
                                 break;
                             case "1":
                                 result += "eleven";
+                                str = str.slice(1, str.length);
+                                length = str.length;
                                 break;
                             case "2":
                                 result += "twelve";
+                                str = str.slice(1, str.length);
+                                length = str.length;
                                 break;
                             case "3":
                                 result += "thirteen";
+                                str = str.slice(1, str.length);
+                                length = str.length;
                                 break;
                             case "4":
                                 result += "fourteen";
+                                str = str.slice(1, str.length);
+                                length = str.length;
                                 break;
                             case "5":
                                 result += "fifteen";
+                                str = str.slice(1, str.length);
+                                length = str.length;
                                 break;
                             case "6":
                                 result += "sixteen";
+                                str = str.slice(1, str.length);
+                                length = str.length;
                                 break;
                             case "7":
                                 result += "seventeen";
+                                str = str.slice(1, str.length);
+                                length = str.length;
                                 break;
                             case "8":
                                 result += "eighteen";
+                                str = str.slice(1, str.length);
+                                length = str.length;
                                 break;
                             case "9":
                                 result += "nineteen";
-                                break;
-                            default:
                                 str = str.slice(1, str.length);
-                                length = str.length;
+                                length = str.length-1;
+                                break;
+                            // default:
+                            //     str = str.slice(1, str.length);
+                            //     length = str.length;
                         }
                         break;
                     }
@@ -106,7 +132,7 @@ module.exports = function toReadable(number) {
             case 1: {
                 switch (str[0]) {
                     case "0":
-                        result += "zero";
+                        result= result.slice(0,result.length);
                         break;
                     case "1":
                         result += "one";
@@ -139,14 +165,13 @@ module.exports = function toReadable(number) {
                 break;
             }
         }
-        if(length>1 && number%10!=0){
-            str = str.slice(1, str.length);
-            result+=" "
-        }else if (number%10==0){
-            break;
-        }else{
-            str = str.slice(1, str.length)
+        
+        if(number%10!=0&&number%100!=0&&str.length>1){
+            result+=' ';
+        }else if(number%10==0&&str.length==3){
+            result+=' ';
         }
+        str = str.slice(1, str.length)
         length = str.length;
     }
     return result;
